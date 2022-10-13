@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>aspnet-Bitak-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\stylecop.json" />
+	</ItemGroup>
+	
+	<ItemGroup>
+		<InternalsVisibleTo Include="Bitak.Web.Tests" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.5" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.161" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.435" PrivateAssets="all">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Bitak.Common\Bitak.Common.csproj" />
+    <ProjectReference Include="..\..\Data\Bitak.Data.Models\Bitak.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\Bitak.Data\Bitak.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Bitak.Services.Data\Bitak.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\Bitak.Services.Mapping\Bitak.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\Bitak.Services.Messaging\Bitak.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\Bitak.Services\Bitak.Services.csproj" />
+    <ProjectReference Include="..\Bitak.Web.Infrastructure\Bitak.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\Bitak.Web.ViewModels\Bitak.Web.ViewModels.csproj" />
+  </ItemGroup>
+</Project>
