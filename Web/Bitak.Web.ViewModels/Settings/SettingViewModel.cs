@@ -1,9 +1,8 @@
 ﻿namespace Bitak.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Bitak.Data.Models;
     using Bitak.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
