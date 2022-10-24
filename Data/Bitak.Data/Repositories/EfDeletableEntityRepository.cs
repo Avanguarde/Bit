@@ -39,5 +39,10 @@
             entity.DeletedOn = DateTime.UtcNow;
             this.Update(entity);
         }
+
+        public object Delete(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

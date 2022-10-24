@@ -1,6 +1,8 @@
 ﻿namespace Bitak.Web.Controllers
 {
     using System;
+    using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
 
     using Bitak.Data.Common.Repositories;
@@ -38,6 +40,38 @@
             await this.repository.SaveChangesAsync();
 
             return this.RedirectToAction(nameof(this.Index));
+        }
+
+        // TODO: Write tests
+        [AutoValidateAntiforgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> RemoveSetting(int id)
+        {
+            var setting = this.repository.All().Where(set => set.Id == id).FirstOrDefault();
+
+            if (setting != null)
+            {
+                this.repository.Delete(setting);
+            }
+
+            await this.repository.SaveChangesAsync();
+
+            return this.Redirect(nameof(this.Index));
+        }
+
+        // TODO: Write tests
+        public async Task<IActionResult> BackupSetting(int id)
+        {
+            var setting = this.repository.AllWithDeleted().Where(set => set.Id == id).FirstOrDefault();
+
+            if (setting != null)
+            {
+                this.repository.Undelete(setting);
+            }
+
+            await this.repository.SaveChangesAsync();
+            return this.Redirect(nameof(this.Index));
+
         }
     }
 }
