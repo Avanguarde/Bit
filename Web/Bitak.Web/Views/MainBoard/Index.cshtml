@@ -1,0 +1,21 @@
+﻿@model Bitak.Web.ViewModels.MainBoard.MainBoardViewModel
+
+<div>@Model.Price</div>
+<div>@Model.Name</div>
+<div>@Model.Socket</div>
+<div>@Model.Brand</div>
+<div>@Model.Chipset</div>
+<div>@Model.Waranty</div>
+<div>@Model.FormFactor</div>
+<div>
+    @foreach (var item in Model.Interfaces)
+    {
+        <a>@item.Name</a>
+    }
+</div>
+<div>
+    @foreach (var mbPort in Model.Ports)
+    {
+        <a>mbPort.</a>
+    }
+</div>

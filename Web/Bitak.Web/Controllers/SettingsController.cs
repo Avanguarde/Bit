@@ -59,6 +59,22 @@
             return this.Redirect(nameof(this.Index));
         }
 
+        [AutoValidateAntiforgeryToken]
+        [HttpPost]
+        public async Task<IActionResult> PermanentRemoveSetting(int id)
+        {
+            var setting = this.repository.AllWithDeleted().Where(set => set.Id == id).FirstOrDefault();
+
+            if (setting != null)
+            {
+                this.repository.HardDelete(setting);
+            }
+
+            await this.repository.SaveChangesAsync();
+
+            return this.Redirect(nameof(this.Index));
+        }
+
         // TODO: Write tests
         public async Task<IActionResult> BackupSetting(int id)
         {

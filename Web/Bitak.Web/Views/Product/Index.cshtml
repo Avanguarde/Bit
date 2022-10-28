@@ -1,0 +1,14 @@
+﻿@model Bitak.Web.ViewModels.Product.ProductViewModel
+
+@{
+    this.ViewData["Title"] = "Product";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+<div>@this.Model.Name</div>
+<div>@this.Model.Description</div>
+
+<div>
+    <a asp-action="InsertProduct" class="btn btn-outline-primary">Insert new</a>
+</div>

@@ -6,27 +6,33 @@
 
 <h1>@this.ViewData["Title"]</h1>
 <ul class="list-group">
-@foreach (var setting in this.Model.Settings)
-{
+    @foreach (var setting in this.Model.Settings)
+    {
         <li class="list-group-item">@setting.Id: @setting.NameAndValue</li>
-    @*<div>@setting.Id: @setting.NameAndValue</div>*@
-}
+        @*<div>@setting.Id: @setting.NameAndValue</div>*@
+    }
 </ul>
 <div>
-<div>
+    <div>
         <a asp-action="InsertSetting" class="btn btn-outline-primary">Insert new</a>
     </div>
-<div class="align-content-lg-center">
-<form asp-controller="Settings" asp-action="RemoveSetting" method="post">
-            <input type="number" name="Id"/>
+    <div class="align-content-lg-center">
+        <form asp-controller="Settings" asp-action="RemoveSetting" method="post">
+            <input type="number" name="Id" />
             <input class="btn btn-outline-danger" type="submit" value="Delete" />
-</form>
-</div>
-<div>
+        </form>
+    </div>
+    <div class="align-content-lg-center">
+        <form asp-controller="Settings" asp-action="PermanentRemoveSetting" method="post">
+            <input type="number" name="Id" />
+            <input class="btn btn-outline-danger" type="submit" value="DeleteFromDatabase" />
+        </form>
+    </div>
+    <div>
         <form asp-controller="Settings" asp-action="BackupSetting" method="post">
             <input type="number" name="Id" />
             <input class="btn btn-outline-success" type="submit" value="Backup" />
         </form>
-</div>
+    </div>
 </div>
 

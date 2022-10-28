@@ -8,7 +8,8 @@
 
     using Bitak.Data.Common.Models;
     using Bitak.Data.Models;
-
+    using Bitak.Data.Models.Others;
+    using Bitak.Data.Models.PcComponents;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,14 @@
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<MbPort> Ports { get; set; }
+
+        public DbSet<MainBoard> MainBoards { get; set; }
+
+        public DbSet<MbInterface> Interfaces { get; set; }
+
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -49,6 +58,42 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<MainBoardMbPort>()
+                .HasKey(p => new { p.MainBoardId, p.MbPortId });
+
+            builder.Entity<MainBoardMbPort>()
+                .HasOne(mb => mb.MainBoard)
+                .WithMany(mb => mb.MainBoardMbPort)
+                .HasForeignKey(mb => mb.MainBoardId);
+
+            builder.Entity<MainBoardMbPort>()
+                .HasOne(mb => mb.MbPort)
+                .WithMany(mb => mb.MainBoardMbPort)
+                .HasForeignKey(mb => mb.MbPortId);
+            // 
+            builder.Entity<MainBoardMbInterface>()
+                .HasKey(mb => new { mb.MbInterfaceId, mb.MainBoardId });
+
+            builder.Entity<MainBoardMbInterface>()
+                .HasOne(mb => mb.MainBoard)
+                .WithMany(mb => mb.MainBoardMbInterface)
+                .HasForeignKey(mb => mb.MainBoardId);
+
+            builder.Entity<MainBoardMbInterface>()
+                .HasOne(mb => mb.MbInterface)
+                .WithMany(mb => mb.MainBoardMbInterface)
+                .HasForeignKey(mb => mb.MbInterfaceId);
+
+            builder.Entity<MainBoard>()
+                .Property(m => m.FormFactor)
+                .HasConversion<string>()
+                .IsRequired();
+
+            builder.Entity<MainBoard>()
+                .Property(m => m.MemoryType)
+                .HasConversion<string>()
+                .IsRequired();
+
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
 

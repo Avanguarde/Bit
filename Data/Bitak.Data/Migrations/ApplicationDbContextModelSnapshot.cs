@@ -142,6 +142,174 @@ namespace Bitak.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Bitak.Data.Models.Others.MainBoardMbInterface", b =>
+                {
+                    b.Property<int>("MbInterfaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MainBoardId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MbInterfaceId", "MainBoardId");
+
+                    b.HasIndex("MainBoardId");
+
+                    b.ToTable("MainBoardMbInterface");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MainBoardMbPort", b =>
+                {
+                    b.Property<int>("MainBoardId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MbPortId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MainBoardId", "MbPortId");
+
+                    b.HasIndex("MbPortId");
+
+                    b.ToTable("MainBoardMbPort");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbInterface", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("MainBoardId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MainBoardId");
+
+                    b.ToTable("Interfaces");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbPort", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int?>("MainBoardId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MainBoardId");
+
+                    b.ToTable("Ports");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.PcComponents.MainBoard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Chipset")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FormFactor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MemorySlots")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MemoryType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(14, 2)
+                        .HasColumnType("decimal(14,2)");
+
+                    b.Property<int>("Socket")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Waranty")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("MainBoards");
+                });
+
             modelBuilder.Entity("Bitak.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -314,6 +482,58 @@ namespace Bitak.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Bitak.Data.Models.Others.MainBoardMbInterface", b =>
+                {
+                    b.HasOne("Bitak.Data.Models.PcComponents.MainBoard", "MainBoard")
+                        .WithMany("MainBoardMbInterface")
+                        .HasForeignKey("MainBoardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bitak.Data.Models.Others.MbInterface", "MbInterface")
+                        .WithMany("MainBoardMbInterface")
+                        .HasForeignKey("MbInterfaceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("MainBoard");
+
+                    b.Navigation("MbInterface");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MainBoardMbPort", b =>
+                {
+                    b.HasOne("Bitak.Data.Models.PcComponents.MainBoard", "MainBoard")
+                        .WithMany("MainBoardMbPort")
+                        .HasForeignKey("MainBoardId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Bitak.Data.Models.Others.MbPort", "MbPort")
+                        .WithMany("MainBoardMbPort")
+                        .HasForeignKey("MbPortId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("MainBoard");
+
+                    b.Navigation("MbPort");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbInterface", b =>
+                {
+                    b.HasOne("Bitak.Data.Models.PcComponents.MainBoard", null)
+                        .WithMany("Interfaces")
+                        .HasForeignKey("MainBoardId");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbPort", b =>
+                {
+                    b.HasOne("Bitak.Data.Models.PcComponents.MainBoard", null)
+                        .WithMany("Ports")
+                        .HasForeignKey("MainBoardId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Bitak.Data.Models.ApplicationRole", null)
@@ -372,6 +592,27 @@ namespace Bitak.Data.Migrations
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbInterface", b =>
+                {
+                    b.Navigation("MainBoardMbInterface");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.Others.MbPort", b =>
+                {
+                    b.Navigation("MainBoardMbPort");
+                });
+
+            modelBuilder.Entity("Bitak.Data.Models.PcComponents.MainBoard", b =>
+                {
+                    b.Navigation("Interfaces");
+
+                    b.Navigation("MainBoardMbInterface");
+
+                    b.Navigation("MainBoardMbPort");
+
+                    b.Navigation("Ports");
                 });
 #pragma warning restore 612, 618
         }

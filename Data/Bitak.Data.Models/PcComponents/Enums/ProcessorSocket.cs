@@ -1,0 +1,37 @@
+﻿namespace Bitak.Data.Models.PcComponents.Enums
+{
+    public enum ProcessorSocket
+    {
+        LGA775 = 1,
+        SocketM = 2,
+        LGA771 = 3,
+        SocketP = 4,
+        LGA1366 = 5,
+        RPGA988A = 6,
+        LGA1156 = 7,
+        LGA1567 = 8,
+        LGA1155 = 9,
+        LGA2011 = 10,
+        RPGA988B = 11,
+        LGA1356 = 12,
+        LGA1150 = 13,
+        G3 = 14,
+        LGA2011V3 = 15,
+        LGA1151 = 16,
+        LGA3647 = 17,
+        LGA2066 = 18,
+        LGA4189 = 19,
+        LGA1200 = 20,
+        LGA1700 = 21,
+        LGA4677 = 22,
+        SWRX8 = 23,
+        AM2Plus = 24,
+        AM3 = 25,
+        FM1 = 26,
+        AM3Plus = 27,
+        AM4 = 28,
+        TR4 = 29,
+        STRX4 = 30,
+        AM5 = 31,
+    }
+}
