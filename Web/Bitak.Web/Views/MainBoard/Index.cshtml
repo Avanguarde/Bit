@@ -1,21 +1,38 @@
-﻿@model Bitak.Web.ViewModels.MainBoard.MainBoardViewModel
+﻿@model Bitak.Web.ViewModels.MainBoard.MainBoardListViewModel
 
-<div>@Model.Price</div>
-<div>@Model.Name</div>
-<div>@Model.Socket</div>
-<div>@Model.Brand</div>
-<div>@Model.Chipset</div>
-<div>@Model.Waranty</div>
-<div>@Model.FormFactor</div>
-<div>
-    @foreach (var item in Model.Interfaces)
-    {
-        <a>@item.Name</a>
-    }
-</div>
-<div>
-    @foreach (var mbPort in Model.Ports)
-    {
-        <a>mbPort.</a>
-    }
-</div>
+@{
+    this.ViewData["Title"] = "MainBoards";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+@foreach (var mainboard in Model.Mainboards)
+{
+    <div asp-controller="MainBoard">
+        <div>
+            <h3>@mainboard.Name</h3>
+        </div>
+        <div>@mainboard.Price</div>
+        <div>@mainboard.Socket</div>
+        <div>@mainboard.Brand</div>
+        <div>@mainboard.Chipset</div>
+        <div>@mainboard.Waranty</div>
+        <div>@mainboard.FormFactor</div>
+        <div>
+            @foreach (var mbInterface in mainboard.Interfaces)
+            {
+                <a>Interface name: @mbInterface.Name</a>
+                <a>Modified on: @mbInterface.ModifiedOn</a>
+                <br />
+            }
+        </div>
+        <div>
+            @foreach (var port in mainboard.Ports)
+            {
+                <a>Ports: @port.Name</a>
+                <br />
+            }
+        </div>
+    </div>
+}
+
