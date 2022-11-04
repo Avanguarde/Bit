@@ -5,7 +5,9 @@
 }
 
 <h1>@this.ViewData["Title"]</h1>
-
+<form asp-controller="MainBoard" asp-action="add" method="get">
+    <button type="submit" class="btn btn-outline-dark">Add</button>
+</form>
 @foreach (var mainboard in Model.Mainboards)
 {
     <div asp-controller="MainBoard">
@@ -18,21 +20,8 @@
         <div>@mainboard.Chipset</div>
         <div>@mainboard.Waranty</div>
         <div>@mainboard.FormFactor</div>
-        <div>
-            @foreach (var mbInterface in mainboard.Interfaces)
-            {
-                <a>Interface name: @mbInterface.Name</a>
-                <a>Modified on: @mbInterface.ModifiedOn</a>
-                <br />
-            }
-        </div>
-        <div>
-            @foreach (var port in mainboard.Ports)
-            {
-                <a>Ports: @port.Name</a>
-                <br />
-            }
-        </div>
+        <div>@mainboard.Interfaces</div>
+        <div>@mainboard.Ports</div>    
     </div>
 }
 

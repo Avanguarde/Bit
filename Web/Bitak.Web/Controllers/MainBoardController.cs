@@ -2,15 +2,17 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Bitak.Common;
+    using Bitak.Data;
     using Bitak.Data.Common.Repositories;
     using Bitak.Data.Models.PcComponents;
-    using Bitak.Data.Repositories;
     using Bitak.Services.Data;
     using Bitak.Web.ViewModels.MainBoard;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Bitak.Services.Mapping;
+    using System;
 
     public class MainBoardController : BaseController
     {
@@ -30,13 +32,16 @@
             return this.View(mainBoards);
         }
 
-        //[HttpPost]
+        public IActionResult Add() { return this.View(); }
+
+        [HttpPost]
         //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Add(MainBoard mainBoard)
+        public async Task<IActionResult> Add(MainBoardViewModel mainBoardModel)
         {
-            //await this.Repository.AddAsync(mainBoard);
-            //await this.Repository.SaveChangesAsync();
-            return this.View();
+            var mainBoard = this.MainBoardService.MakeModel(mainBoardModel);
+            await this.Repository.AddAsync(mainBoard);
+            await this.Repository.SaveChangesAsync();
+            return this.RedirectToAction("Index");
         }
 
 

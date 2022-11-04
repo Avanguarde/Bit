@@ -1,14 +1,8 @@
 ﻿namespace Bitak.Data.Models.PcComponents
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using Bitak.Data.Common.Models;
-    using Bitak.Data.Models.Others;
     using Bitak.Data.Models.PcComponents.Enums;
     using Microsoft.EntityFrameworkCore;
 
@@ -40,15 +34,10 @@
 
         public int MemorySlots { get; set; }
 
-        public ICollection<MbPort> Ports { get; set; }
+        public string Ports { get; set; }
 
-        public ICollection<MbInterface> Interfaces { get; set; }
+        public string Interfaces { get; set; }
 
         public int? Waranty { get; set; }
-
-        public List<MainBoardMbPort> MainBoardMbPort { get; set; }
-
-        public List<MainBoardMbInterface> MainBoardMbInterface { get; set; }
-
     }
 }

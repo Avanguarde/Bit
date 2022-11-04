@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Bitak.Data.Common\Bitak.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Bitak.Data.Models\Bitak.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Bitak.Web.ViewModels\Bitak.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Bitak.Services.Mapping\Bitak.Services.Mapping.csproj" />
   </ItemGroup>
 

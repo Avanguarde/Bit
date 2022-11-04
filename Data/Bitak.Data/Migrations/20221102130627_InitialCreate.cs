@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Bitak.Data.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,6 +70,8 @@ namespace Bitak.Data.Migrations
                     FormFactor = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MemoryType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MemorySlots = table.Column<int>(type: "int", nullable: false),
+                    Ports = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Interfaces = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Waranty = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -223,101 +225,6 @@ namespace Bitak.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Interfaces",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    MainBoardId = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Interfaces", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Interfaces_MainBoards_MainBoardId",
-                        column: x => x.MainBoardId,
-                        principalTable: "MainBoards",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ports",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MainBoardId = table.Column<int>(type: "int", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ports", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ports_MainBoards_MainBoardId",
-                        column: x => x.MainBoardId,
-                        principalTable: "MainBoards",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MainBoardMbInterface",
-                columns: table => new
-                {
-                    MainBoardId = table.Column<int>(type: "int", nullable: false),
-                    MbInterfaceId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MainBoardMbInterface", x => new { x.MbInterfaceId, x.MainBoardId });
-                    table.ForeignKey(
-                        name: "FK_MainBoardMbInterface_Interfaces_MbInterfaceId",
-                        column: x => x.MbInterfaceId,
-                        principalTable: "Interfaces",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MainBoardMbInterface_MainBoards_MainBoardId",
-                        column: x => x.MainBoardId,
-                        principalTable: "MainBoards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MainBoardMbPort",
-                columns: table => new
-                {
-                    MainBoardId = table.Column<int>(type: "int", nullable: false),
-                    MbPortId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MainBoardMbPort", x => new { x.MainBoardId, x.MbPortId });
-                    table.ForeignKey(
-                        name: "FK_MainBoardMbPort_MainBoards_MainBoardId",
-                        column: x => x.MainBoardId,
-                        principalTable: "MainBoards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MainBoardMbPort_Ports_MbPortId",
-                        column: x => x.MbPortId,
-                        principalTable: "Ports",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -368,29 +275,9 @@ namespace Bitak.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Interfaces_MainBoardId",
-                table: "Interfaces",
-                column: "MainBoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MainBoardMbInterface_MainBoardId",
-                table: "MainBoardMbInterface",
-                column: "MainBoardId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MainBoardMbPort_MbPortId",
-                table: "MainBoardMbPort",
-                column: "MbPortId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MainBoards_IsDeleted",
                 table: "MainBoards",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ports_MainBoardId",
-                table: "Ports",
-                column: "MainBoardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_IsDeleted",
@@ -421,10 +308,7 @@ namespace Bitak.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "MainBoardMbInterface");
-
-            migrationBuilder.DropTable(
-                name: "MainBoardMbPort");
+                name: "MainBoards");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -437,15 +321,6 @@ namespace Bitak.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Interfaces");
-
-            migrationBuilder.DropTable(
-                name: "Ports");
-
-            migrationBuilder.DropTable(
-                name: "MainBoards");
         }
     }
 }

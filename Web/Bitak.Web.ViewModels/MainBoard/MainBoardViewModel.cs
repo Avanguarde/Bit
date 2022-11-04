@@ -1,10 +1,8 @@
 ﻿namespace Bitak.Web.ViewModels.MainBoard
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
-    using Bitak.Data.Models.Others;
     using Bitak.Data.Models.PcComponents;
     using Bitak.Data.Models.PcComponents.Enums;
     using Bitak.Services.Mapping;
@@ -38,9 +36,9 @@
 
         public int MemorySlots { get; set; }
 
-        public ICollection<MbPort> Ports { get; set; }
+        public string Ports { get; set; }
 
-        public ICollection<MbInterface> Interfaces { get; set; }
+        public string Interfaces { get; set; }
 
         public int? Waranty { get; set; }
 

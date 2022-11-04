@@ -10,6 +10,13 @@
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
 	  <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\popper\**" />
+    <Content Remove="wwwroot\lib\popper\**" />
+    <EmbeddedResource Remove="wwwroot\lib\popper\**" />
+    <None Remove="wwwroot\lib\popper\**" />
+  </ItemGroup>
 	<ItemGroup>
 		<AdditionalFiles Include="..\..\stylecop.json" />
 	</ItemGroup>
