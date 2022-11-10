@@ -67,6 +67,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IMainBoardService, MainBoardService>();
+            services.AddTransient<IEnumService, EnumService>();
         }
 
         private static void Configure(WebApplication app)
@@ -93,7 +94,14 @@
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                OnPrepareResponse = options =>
+                {
+                    options.Context.Response.Headers.Add("Cache-Control", "no-cache, no-store");
+                    options.Context.Response.Headers.Add("Expires", "-1");
+                },
+            });
             app.UseCookiePolicy();
 
             app.UseRouting();

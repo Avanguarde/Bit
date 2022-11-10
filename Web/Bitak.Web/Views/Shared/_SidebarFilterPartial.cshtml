@@ -1,64 +1,161 @@
-﻿<div class="wrapper">
-    <!-- Sidebar Holder -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
-        </div>
+﻿
 
-        <ul class="list-unstyled components">
-            <p>Dummy Heading</p>
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">About</a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">Portfolio</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-        </ul>
 
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="#" class="download">Download source</a>
-            </li>
-            <li>
-                <a href="#" class="article">Back to article</a>
-            </li>
-        </ul>
-    </nav>
+<div class="container">
+    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove;">
+        <form>
+            <fieldset>
+                <div class="col-md-12">
+                    <label id="Brand">Brand</label>
+                    <div data-role="controlgroup">
+                        <ul style="list-style-type: none;">
+
+                            <li>
+                                <input id="Asus" type="checkbox" style="margin-right: 5px;" />
+                                <label for="Asus">Asus</label>
+                            </li>
+                            <li>
+                                <input id="Gigabyte" type="checkbox" style="margin-right: 5px;" />
+                                <label for="Gigabyte">Gigabyte</label>
+                            </li>
+                            <li>
+                                <input id="MSI" type="checkbox" style="margin-right: 5px;" />
+                                <label for="MSI">MSI</label>
+                            </li>
+                            <li>
+                                <input id="ASRock" type="checkbox" style="margin-right: 5px;" />
+                                <label for="ASRock">ASRock</label>
+                            </li>
+                            <li>
+                                <input id="EVGA" type="checkbox" style="margin-right: 5px;" />
+                                <label for="EVGA">EVGA</label>
+                            </li>
+                            <li>
+                                <input id="Biostar" type="checkbox" style="margin-right: 5px;" />
+                                <label for="Biostar">Biostar</label>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
+        <form>
+            <fieldset>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <label id="FormFactor" style="font-weight: bold;">FormFactor</label>
+                    <div data-role="controlgroup">
+                        <ul style="list-style-type: none;">
+
+                            <li>
+                                <input id="LGA775" type="checkbox" style="margin-right: 5px;" />
+                                <label for="LGA775">LGA775</label>
+                            </li>
+                            <li>
+                                <input id="SocketM" type="checkbox" style="margin-right: 5px;" />
+                                <label for="SocketM">SocketM</label>
+                            </li>
+                            <li>
+                                <input id="LGA1156" type="checkbox" style="margin-right: 5px;" />
+                                <label for="LGA1156">LGA1156</label>
+                            </li>
+                            <li>
+                                <input id="AM4" type="checkbox" style="margin-right: 5px;" />
+                                <label for="AM4">AM4</label>
+                            </li>
+                            <li>
+                                <input id="AM5" type="checkbox" style="margin-right: 5px;" />
+                                <label for="AM5">AM5</label>
+                            </li>
+                            <li>
+                                <input id="LGA1700" type="checkbox" style="margin-right: 5px;" />
+                                <label for="LGA1700">LGA1700</label>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
+        <form>
+            <fieldset>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <label id="FormFactor" style="font-weight: bold;">Chipset</label>
+                    <div data-role="controlgroup">
+                        <ul style="list-style-type: none;">
+
+                            <li>
+                                <input id="AMDA320" type="checkbox" style="margin-right: 5px;" />
+                                <label for="AMDA320">AMDA320</label>
+                            </li>
+                            <li>
+                                <input id="AMDA520" type="checkbox" style="margin-right: 5px;" />
+                                <label for="AMDA520">AMDA520</label>
+                            </li>
+                            <li>
+                                <input id="AMDB450" type="checkbox" style="margin-right: 5px;" />
+                                <label for="AMDB450">AMDB450</label>
+                            </li>
+                            <li>
+                                <input id="INTELB365" type="checkbox" style="margin-right: 5px;" />
+                                <label for="INTELB365">INTELB365</label>
+                            </li>
+                            <li>
+                                <input id="INTELB560" type="checkbox" style="margin-right: 5px;" />
+                                <label for="INTELB560">INTELB560</label>
+                            </li>
+                            <li>
+                                <input id="INTELZ490" type="checkbox" style="margin-right: 5px;" />
+                                <label for="INTELZ490">INTELZ490</label>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
+        <form>
+            <fieldset>
+                <div class="col-md-12" style="margin-top: 10px;">
+                    <label id="FormFactor" style="font-weight: bold;">Price</label>
+                    <div data-role="controlgroup">
+                        <ul style="list-style-type: none;">
+
+                            <li>
+                                <label for="amount">Price range:</label>
+                                <input id="amount" type="text" size="5" readonly style="border:0; color:#f6931f; font-weight:bold;" />
+                                
+                            </li>
+                            <div id="slider-range"></div>
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
+<script>
+    $(function ()
+    {
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [75, 300],
+            slide: function (event, ui)
+            {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            }
         });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
     });
 </script>

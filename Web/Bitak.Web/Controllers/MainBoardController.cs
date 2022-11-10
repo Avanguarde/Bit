@@ -13,6 +13,10 @@
     using Microsoft.AspNetCore.Mvc;
     using Bitak.Services.Mapping;
     using System;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using NuGet.Protocol;
+    using System.Drawing.Drawing2D;
 
     public class MainBoardController : BaseController
     {
@@ -26,11 +30,36 @@
 
         public IDeletableEntityRepository<MainBoard> Repository { get; }
 
-        public IActionResult Index()
+        public IActionResult Index(string brand)
         {
-            MainBoardListViewModel mainBoards = new MainBoardListViewModel { Mainboards = this.MainBoardService.GetAll<MainBoardViewModel>().ToList() };
-            return this.View(mainBoards);
+            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
+            var model = new MainBoardListViewModel { Mainboards = mainboards };
+
+            //if (brand != null)
+            //{
+            //    var models = this.MainBoardService
+            //    .GetAll<MainBoardViewModel>()
+            //    .Where(b => b.Brand == brand)
+            //    .ToList();
+
+            //    model = new MainBoardListViewModel { Mainboards = models };
+            //}
+            
+            return this.View(model);
         }
+
+        
+        //public IActionResult Index(string brand)
+        //{
+        //    var models = this.MainBoardService
+        //    .GetAll<MainBoardViewModel>()
+        //    .Where(b => b.Brand == brand)
+        //    .ToList();
+
+        //    var model = new MainBoardListViewModel { Mainboards = models };
+
+        //    return this.View(model);
+        //}
 
         public IActionResult Add() { return this.View(); }
 
@@ -44,6 +73,18 @@
             return this.RedirectToAction("Index");
         }
 
+        //public IActionResult FilterByBrand(string brand)
+        //{
+        //    var models = this.MainBoardService
+        //    .GetAll<MainBoardViewModel>()
+        //    .Where(b => b.Brand == brand)
+        //    .ToList();
 
+        //    var model = new MainBoardListViewModel { Mainboards = models };
+
+        //    this.TempData["MainBoardList"] = model;
+
+        //    return this.RedirectToAction("Index", "MainBoard");
+        //}
     }
 }

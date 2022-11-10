@@ -167,52 +167,80 @@ a, a:hover, a:focus {
     align-items: stretch;
     perspective: 1500px;
 }
-
+/*.bordershadow {
+    height: 70px;
+    width: 80%;
+    line-height: 70px;
+    text-align: center;
+    border: 2px solid #dd;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+    transition: all 200ms ease-out;
+}*/
 
 #sidebar {
-    min-width: 250px;
+    min-width: 120px;
     max-width: 250px;
-    background: #7386D5;
-    color: #fff;
+    line-height: 70px;
+    background: #fafafa;
+    border: 2px solid #faf6cb;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+    transition: all 200ms ease-out;
+    color: gray;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
 }
 
-    #sidebar.active {
-        margin-left: -250px;
-        transform: rotateY(100deg);
+.custom-sidebar {
+    min-width: 150px;
+    max-width: 180px;
+    line-height: 70px;
+    background: #fafafa;
+    border: 2px solid lightgrey;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+    transition: all 200ms ease-out;
+    color: grey;
+    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+    transform: rotateY(100deg);
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #fafafa;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #999;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+    #sidebar ul li a:hover {
+        color: black;
+        background: #fff;
     }
 
-    #sidebar .sidebar-header {
-        padding: 20px;
-        background: #6d7fcc;
-    }
-
-    #sidebar ul.components {
-        padding: 20px 0;
-        border-bottom: 1px solid #47748b;
-    }
-
-    #sidebar ul p {
-        color: #fff;
-        padding: 10px;
-    }
-
-    #sidebar ul li a {
-        padding: 10px;
-        font-size: 1.1em;
-        display: block;
-    }
-
-        #sidebar ul li a:hover {
-            color: #7386D5;
-            background: #fff;
-        }
-
-    #sidebar ul li.active > a, a[aria-expanded="true"] {
-        color: #fff;
-        background: #6d7fcc;
-    }
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fff;
+    background: #fff;
+}
 
 
 a[data-toggle="collapse"] {
@@ -343,3 +371,39 @@ a.article, a.article:hover {
         }
 }
 
+.custom-checkbox {
+    margin-right: 8px;
+    position: initial;
+    accent-color: #faf6cb;
+    color: gray;
+}
+
+    .custom-checkbox:hover {
+        color: black;
+    }
+
+        .custom-checkbox:hover input::after {
+            color: transparent;
+        }
+
+#custom-sidebar-lable {
+    position: relative;
+    color: gray;
+}
+
+    #custom-sidebar-lable:hover {
+        color: black;
+    }
+
+.custom-span:after {
+    color: gray;
+}
+
+.custom-span:hover::after{
+    color: black;
+}
+
+.custom-span:hover:hover::after {
+    color: black;
+    transform: rotate(90deg);
+}

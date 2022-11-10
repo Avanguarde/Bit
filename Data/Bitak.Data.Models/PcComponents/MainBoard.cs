@@ -13,8 +13,7 @@
         public string Name { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string Brand { get; set; }
+        public Brand Brand { get; set; }
 
         [Required]
         [Precision(14, 2)]

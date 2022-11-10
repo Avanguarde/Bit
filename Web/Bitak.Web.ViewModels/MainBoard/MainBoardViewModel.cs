@@ -14,9 +14,8 @@
         [StringLength(200, MinimumLength = 10, ErrorMessage ="Name must be from 10 to 200 characters!")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Name is required!")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be from 3 to 50 characters!")]
-        public string Brand { get; set; }
+        [Required(ErrorMessage ="Brand is required!")]
+        public Brand Brand { get; set; }
 
         [Required(ErrorMessage = "Price is required!")]
         [Precision(14, 2)]
