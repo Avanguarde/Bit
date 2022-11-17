@@ -1,13 +1,16 @@
-﻿using Bitak.Data.Models.PcComponents.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Bitak.Web.ViewModels.SideBar
+﻿namespace Bitak.Web.ViewModels.SideBar
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using Bitak.Data.Models.PcComponents.Enums;
+
     public class SideBarViewModel
     {
-        public Brand Brand { get; set; }
+        public Array Brands { get; set; }
 
-        public ProcessorSocket Socket { get; set; }
+        public Array Socket { get; set; }
 
         public MbChipset Chipset { get; set; }
 

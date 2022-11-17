@@ -150,10 +150,8 @@ namespace Bitak.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Brand")
+                        .HasColumnType("int");
 
                     b.Property<int>("Chipset")
                         .HasColumnType("int");

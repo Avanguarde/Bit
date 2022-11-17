@@ -1,140 +1,92 @@
-﻿
+﻿@using Bitak.Data.Models.PcComponents.Enums
+@using Bitak.Web.ViewModels.MainBoard;
+@using System.Linq;
+@inject Bitak.Services.Data.IEnumService enumService;
+
+@model MainBoardListViewModel;
 
 
-<div class="container">
-    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove;">
+<div id="sidebar" class="container">
+    <div>
         <form>
             <fieldset>
-                <div class="col-md-12">
-                    <label id="Brand">Brand</label>
-                    <div data-role="controlgroup">
-                        <ul style="list-style-type: none;">
-
-                            <li>
-                                <input id="Asus" type="checkbox" style="margin-right: 5px;" />
-                                <label for="Asus">Asus</label>
-                            </li>
-                            <li>
-                                <input id="Gigabyte" type="checkbox" style="margin-right: 5px;" />
-                                <label for="Gigabyte">Gigabyte</label>
-                            </li>
-                            <li>
-                                <input id="MSI" type="checkbox" style="margin-right: 5px;" />
-                                <label for="MSI">MSI</label>
-                            </li>
-                            <li>
-                                <input id="ASRock" type="checkbox" style="margin-right: 5px;" />
-                                <label for="ASRock">ASRock</label>
-                            </li>
-                            <li>
-                                <input id="EVGA" type="checkbox" style="margin-right: 5px;" />
-                                <label for="EVGA">EVGA</label>
-                            </li>
-                            <li>
-                                <input id="Biostar" type="checkbox" style="margin-right: 5px;" />
-                                <label for="Biostar">Biostar</label>
-                            </li>
-
+                <div class="">
+                    <a class="nav-link text-dark" aria-controls="collapseOne" aria-expanded="true" data-toggle="collapse" href="#collapseBrand" style="background-color: #fafafa; font-weight: bold; padding: 0;">
+                        Brands
+                        </a>
+                    <div id="collapseBrand" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
+                        <ul style="list-style-type: none; margin-right: 3px;">
+                            @foreach (var item in enumService.GetAll<Brand>())
+                            {
+                                <li>
+                                    <input id="@item" type="checkbox" style="margin-right: 5px;" />
+                                    <label for="@item">@item </label>
+                                    <label for="@item" style="color: darkgrey">(@Model.Mainboards.Where(m => m.Brand.ToString() == item.ToString()).Count())</label>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
             </fieldset>
         </form>
     </div>
-
-
-    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
+    <div>
         <form>
-            <fieldset>
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <label id="FormFactor" style="font-weight: bold;">FormFactor</label>
-                    <div data-role="controlgroup">
-                        <ul style="list-style-type: none;">
-
-                            <li>
-                                <input id="LGA775" type="checkbox" style="margin-right: 5px;" />
-                                <label for="LGA775">LGA775</label>
-                            </li>
-                            <li>
-                                <input id="SocketM" type="checkbox" style="margin-right: 5px;" />
-                                <label for="SocketM">SocketM</label>
-                            </li>
-                            <li>
-                                <input id="LGA1156" type="checkbox" style="margin-right: 5px;" />
-                                <label for="LGA1156">LGA1156</label>
-                            </li>
-                            <li>
-                                <input id="AM4" type="checkbox" style="margin-right: 5px;" />
-                                <label for="AM4">AM4</label>
-                            </li>
-                            <li>
-                                <input id="AM5" type="checkbox" style="margin-right: 5px;" />
-                                <label for="AM5">AM5</label>
-                            </li>
-                            <li>
-                                <input id="LGA1700" type="checkbox" style="margin-right: 5px;" />
-                                <label for="LGA1700">LGA1700</label>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
-        <form>
-            <fieldset>
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <label id="FormFactor" style="font-weight: bold;">Chipset</label>
-                    <div data-role="controlgroup">
-                        <ul style="list-style-type: none;">
-
-                            <li>
-                                <input id="AMDA320" type="checkbox" style="margin-right: 5px;" />
-                                <label for="AMDA320">AMDA320</label>
-                            </li>
-                            <li>
-                                <input id="AMDA520" type="checkbox" style="margin-right: 5px;" />
-                                <label for="AMDA520">AMDA520</label>
-                            </li>
-                            <li>
-                                <input id="AMDB450" type="checkbox" style="margin-right: 5px;" />
-                                <label for="AMDB450">AMDB450</label>
-                            </li>
-                            <li>
-                                <input id="INTELB365" type="checkbox" style="margin-right: 5px;" />
-                                <label for="INTELB365">INTELB365</label>
-                            </li>
-                            <li>
-                                <input id="INTELB560" type="checkbox" style="margin-right: 5px;" />
-                                <label for="INTELB560">INTELB560</label>
-                            </li>
-                            <li>
-                                <input id="INTELZ490" type="checkbox" style="margin-right: 5px;" />
-                                <label for="INTELZ490">INTELZ490</label>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div style="border: 3px lightgrey;border-radius: 7px; border-style: groove; margin-top: 10px;">
-        <form>
-            <fieldset>
-                <div class="col-md-12" style="margin-top: 10px;">
-                    <label id="FormFactor" style="font-weight: bold;">Price</label>
-                    <div data-role="controlgroup">
-                        <ul style="list-style-type: none;">
-
-                            <li>
-                                <label for="amount">Price range:</label>
-                                <input id="amount" type="text" size="5" readonly style="border:0; color:#f6931f; font-weight:bold;" />
+           
+                <div class="">
+                    <a class="nav-link text-dark" aria-controls="collapseOne" aria-expanded="true" data-toggle="collapse" href="#collapseFormFactor" style="background-color: #fafafa; font-weight: bold; padding: 0;">
+                        Form factor
+                    </a>
+                    <div id="collapseFormFactor" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
+                        <ul style="list-style-type: none; margin-right: 3px;">
+                            @foreach (var item in enumService.GetAll<FormFactor>())
+                            {
                                 
+                                <li>
+                                    <input id="@item" type="checkbox" style="margin-right: 5px; " />
+                                    <label for="@item">@item</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+           
+        </form>
+    </div>
+    <div>
+        <form>
+            <fieldset>
+                <div class="">
+                    <a class="nav-link text-dark" aria-controls="collapseOne" aria-expanded="true" data-toggle="collapse" href="#collapseChipset" style="background-color: #fafafa; font-weight: bold; padding: 0;">
+                        Chipset
+                    </a>
+                    <div id="collapseChipset" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
+                        <ul style="list-style-type: none; margin-right: 3px;">
+                            @foreach (var item in enumService.GetAll<MbChipset>())
+                            {
+                                <li>
+                                    <input id="@item" type="checkbox" style="margin-right: 5px;" />
+                                    <label for="@item">@item</label>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <form>
+            <fieldset>
+                <div class="">
+                    <label class="nav-link text-dark" id="Price" style="font-weight: bold; padding: 0;">Price</label>
+                    <div class="wrapper" data-role="controlgroup">
+                        <ul style="list-style-type: none; margin-right: 3px;">
+                            <li style="margin-right: 10px;">
+                                <input id="amount" style="height: 30px; flex: 1; overflow: auto;" type="text" size="5" readonly; />
+                                <div id="slider-range"></div>
                             </li>
-                            <div id="slider-range"></div>
+                            
                         </ul>
                     </div>
                 </div>
@@ -143,19 +95,6 @@
     </div>
 </div>
 <script>
-    $(function ()
-    {
-        $("#slider-range").slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [75, 300],
-            slide: function (event, ui)
-            {
-                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
-            }
-        });
-        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-            " - $" + $("#slider-range").slider("values", 1));
-    });
+    
+    
 </script>

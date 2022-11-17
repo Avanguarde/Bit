@@ -20,7 +20,10 @@
                 <li>
                     <div class="col-md-10">
                         <label asp-for="Brand" class="col-md-1 control-label">Brand:</label>
-                        <input type="text" name="Brand" asp-for="Brand" />
+                        <select name="Brand" asp-for="Brand" asp-items="Html.GetEnumSelectList<Brand>()">
+                            <option selected="selected"; value="">Please select</option>
+                            </select>
+                            
                     </div>
                 </li>
                 <li>
@@ -40,7 +43,7 @@
                 <li>
                     <div class="col-md-10">
                         <label asp-for="Chipset" class="col-md-1 control-label">Chipset:</label>
-                        <select asp-for="Socket" asp-items="Html.GetEnumSelectList<MbChipset>()">
+                        <select asp-for="Chipset" asp-items="Html.GetEnumSelectList<MbChipset>()">
                             <option selected="selected" value="">Please select</option>
                         </select>
                     </div>

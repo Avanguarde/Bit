@@ -30,38 +30,19 @@
 
         public IDeletableEntityRepository<MainBoard> Repository { get; }
 
-        public IActionResult Index(string brand)
+        public IActionResult Index()
         {
             var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
             var model = new MainBoardListViewModel { Mainboards = mainboards };
 
-            //if (brand != null)
-            //{
-            //    var models = this.MainBoardService
-            //    .GetAll<MainBoardViewModel>()
-            //    .Where(b => b.Brand == brand)
-            //    .ToList();
-
-            //    model = new MainBoardListViewModel { Mainboards = models };
-            //}
-            
             return this.View(model);
         }
 
-        
-        //public IActionResult Index(string brand)
-        //{
-        //    var models = this.MainBoardService
-        //    .GetAll<MainBoardViewModel>()
-        //    .Where(b => b.Brand == brand)
-        //    .ToList();
-
-        //    var model = new MainBoardListViewModel { Mainboards = models };
-
-        //    return this.View(model);
-        //}
-
-        public IActionResult Add() { return this.View(); }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return this.View();
+        }
 
         [HttpPost]
         //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]

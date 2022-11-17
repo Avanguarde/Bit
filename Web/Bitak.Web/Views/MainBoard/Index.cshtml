@@ -1,166 +1,46 @@
-﻿@model Bitak.Web.ViewModels.MainBoard.MainBoardListViewModel
+﻿@using Bitak.Web.ViewModels.SideBar
+@model Bitak.Web.ViewModels.MainBoard.MainBoardListViewModel
 
 @{
     this.ViewData["Title"] = "MainBoards";
-    var mbBrandCounter = 0;
 }
 
-<section id="category-grid" class="wrapper">
+<section id="category-grid">
     <div class="container">
         <div class="row">
             <!------------------------------------Sidebar------------------------------------------------------>
-            <div id="" class="col-xs-12 col-sm-3">
-                <div class="filters-inner">
-                    <div class="filter-heading">
-                        <!--TODO-Selected filters-->
-                        <span>Selected Filters</span>
-                    </div>
-                    <!------------------------------------Filters------------------------------------------------------>
-
-                    <div id="sidebar">
-                        <div id="filter-accordion" class="panel-group" aria-multiselectable="true" role="tablist">
-                            <div class="panel panel-default">
-                                <div id="heading-one" class="panel-heading" role="tab">
-                                    <strong class="text-dark">
-                                        <a class="nav-link text-dark" aria-controls="collapseOne" aria-expanded="true" data-toggle="collapse" href="#collapseBrands" style="background-color: #fafafa">
-                                            Brand
-                                            <span id="cstmspan" class="custom-span" onclick="myFunction()">
-                                                &#x25B6
-                                            </span>
-                                        </a>
-
-                                    </strong>
-                                </div>
-                                <div id="collapseBrands" class="panel-collapse collapse in" aria-labelledby="headingOne" role="tabpanel" aria-expanded="true">
-                                    <div class="panel-body">
-                                        <!--::Before-->
-                                        <!--TODO-Foreach Brand generate <li> item-->
-                                        <ul style="list-style-type: none;">
-
-                                            @foreach (var br in Model.Mainboards)
-                                            {
-                                                <li>
-                                                    <div class="form-row">
-                                                        <input id="@mbBrandCounter" class="custom-checkbox" name="@br.Brand" type="checkbox"
-                                                           value="" />
-                                                        <label id="custom-sidebar-lable" class="form-check-label" for="@mbBrandCounter">@br.Brand</label>
-                                                    </div>
-                                                </li>
-                                                mbBrandCounter++;
-                                            }
-                                        </ul>
-                                        <!--::After-->
-
-                                    </div>
-
-                                </div>
-                            </div>
+            <div class="col-md-3">
+                <partial name="_SidebarFilterPartial" />
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    @foreach (var item in Model.Mainboards)
+                    {
+                        <div class="col-md-4" style="padding: 10px;">
+                            <div>@item.Name</div>
+                            <div><span>Brand: </span>@item.Brand</div>
+                            <div><span>Chipset: </span>@item.Chipset</div>
+                            <div><span>Memory slots: </span>@item.MemorySlots</div>
+                            <div><span>Socket: </span>@item.Socket</div>
+                            <div><span>Form factor: </span>@item.FormFactor</div>
+                            <div><span>Interfaces: </span>@item.Interfaces</div>
+                            <div><span>Memory type: </span>@item.MemoryType</div>
+                            <div><span>Price: </span>@item.Price</div>
 
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
-            <!------------------------------------Sidebar-End------------------------------------------------------>
-            <!------------------------------------Main page begin------------------------------------------------------>
-            <div class="col-xs-12 col-sm-9" style="padding-right:0px;width:78%;">
-                <section id="gaming">
-                    <div class="grid-list-products">
-                        <div class="container">
-                            <div class="row-category-info" style="margin: 0px; background: none">
-                                <div class="col-xs-12">
-                                    <h1 id="mbHeading" class="col-xl-10" style="color: rgb(51, 51, 51) !important">Main boards</h1>
-                                    <div>
-                                        <label for="mbHeading" class="col-2" style="color: rgb(51, 51, 51) !important;">
-                                            <span class="" style="color: rgb(183, 183, 183) !important;">(</span>
-                                            <span class="" style="color: rgb(183, 183, 183) !important;">@Model.Mainboards.Count()</span>
-                                            <span class="" style="color: rgb(183, 183, 183) !important;">)</span>
-                                        </label>
-                                    </div>
-                                    <h2 class="seo-h2">
-                                        Дънни платки, от които се нуждаете, на цени които можете да си позволите! Широко разнообразие от доказани марки Asrock, Asus, Gigabyte, Intel, MSI, NZXT, Supermicro, EVGA, Biostar
-                                    </h2>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="control-bar-holder">
-                            <div class="cintrol-bar" style="overflow: hidden;">
-                                <div class="col-xs-9 col-sm-6 col-md-6 col-lg-6">
-                                    <div class="grid-list-buttons" style="float: left;">
-                                        <div class="col-xs-4 col-md-4 sort-filters-container" style="margin-top: 5px;">
-                                            <label class="sort-by-lbl" style="display:inline-block;float:left;margin-right: 10px;">
-                                                Подредба&nbsp;
-                                            </label>
-                                        </div>
-                                        <div class="col-xs-8 col-md-8">
-                                            <!--TODO-Event-->
-                                            <select id="order-by" class="form-control" name="order-by" style="width: 180px">
-                                                @*<option selected="" value="price-asc">Price ascending</option>
-                                                <option value="price-desc">Price descending</option>
-                                                <option value="newest">Newest</option>
-                                                <option value="promo">Promotion</option>
-                                                <option value="rating">Rating</option>*@
-                                            </select>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-xs-3 col-sm-6 col-md-6 col-lg-6 grid-list-buttons-container" style="margin-top: 5px;">
-                                    <div class"grid-list-buttons">
-                                        <ul>
-                                            <li class="grid-list-button-item active">
-                                                <a id="grid-btn" data-toggle="tab" href="#grid-view">
-                                                    <i class="fa fa-th-large"></i>
-                                                    <span>
-                                                        Grid
-                                                    </span>
-                                                </a>
-
-
-                                            </li>
-                                            <li class="grid-list-button-item">
-                                                <a data-toggle="tab" href="#list-view" id="list-btn">
-                                                    <i class="fa fa-th-list"></i>
-                                                    <span>
-                                                        List
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="result-holder" class="tab-content">
-                            <div id="grid-view" class="product-grid fade tab-pane in active">
-                                <div class="product-grid-holder-new">
-                                    <div class="row no-margin grid-result">
-                                        @foreach (var mb in Model.Mainboards)
-                                        {
-                                            <div>@mb.Name</div>
-                                        }
-                                    </div>
-                                    <a id="ioio" href="#">ioio</a>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </section>
-            </div>
-            <!------------------------------------Main page end------------------------------------------------------>
-
-
         </div>
 
     </div>
 </section>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $("#ioio").click(function(){
+    $(document).ready(function ()
+    {
+        $("#ioio").click(function ()
+        {
             let a = this.text;
             alert("opsa" + " " + a);
         })

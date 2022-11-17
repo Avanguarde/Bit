@@ -6,10 +6,16 @@
     using Bitak.Data.Models.PcComponents;
     using Bitak.Data.Models.PcComponents.Enums;
     using Bitak.Services.Mapping;
+    using Bitak.Web.ViewModels.SideBar;
     using Microsoft.EntityFrameworkCore;
 
     public class MainBoardViewModel : IMapFrom<MainBoard>, IHaveCustomMappings
     {
+        public MainBoardViewModel()
+        {
+            this.SideBarView = new SideBarViewModel();
+        }
+
         [Required(ErrorMessage = "Name is required!")]
         [StringLength(200, MinimumLength = 10, ErrorMessage ="Name must be from 10 to 200 characters!")]
         public string Name { get; set; }
@@ -40,6 +46,8 @@
         public string Interfaces { get; set; }
 
         public int? Waranty { get; set; }
+
+        public SideBarViewModel SideBarView { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

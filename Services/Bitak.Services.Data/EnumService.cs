@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bitak.Data.Models.PcComponents.Enums;
-
-namespace Bitak.Services.Data
+﻿namespace Bitak.Services.Data
 {
+    using System;
+
     public class EnumService : IEnumService
     {
               public Array GetAll<T>()

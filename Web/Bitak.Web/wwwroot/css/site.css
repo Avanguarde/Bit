@@ -179,29 +179,15 @@ a, a:hover, a:focus {
 }*/
 
 #sidebar {
-    min-width: 120px;
-    max-width: 250px;
-    line-height: 70px;
+    min-width: 170px;
+    max-width: 180px;
+    line-height: 40px;
     background: #fafafa;
     border: 2px solid #faf6cb;
     border-radius: 3px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
     transition: all 200ms ease-out;
     color: gray;
-    transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-    transform-origin: bottom left;
-}
-
-.custom-sidebar {
-    min-width: 150px;
-    max-width: 180px;
-    line-height: 70px;
-    background: #fafafa;
-    border: 2px solid lightgrey;
-    border-radius: 3px;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-    transition: all 200ms ease-out;
-    color: grey;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
 }
@@ -238,7 +224,7 @@ a, a:hover, a:focus {
     }
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
+    color: black;
     background: #fff;
 }
 
@@ -266,7 +252,7 @@ ul.CTAs {
 }
 
     ul.CTAs a {
-        text-align: center;
+        text-align: left;
         font-size: 0.9em !important;
         display: block;
         border-radius: 5px;
@@ -406,4 +392,10 @@ a.article, a.article:hover {
 .custom-span:hover:hover::after {
     color: black;
     transform: rotate(90deg);
+}
+
+.heding-span {
+    font-weight: 400;
+    font-size: 0.7em;
+    color: lightgrey !important;
 }
