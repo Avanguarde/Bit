@@ -1,22 +1,26 @@
 ﻿namespace Bitak.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing.Drawing2D;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
+
     using AutoMapper;
     using Bitak.Common;
     using Bitak.Data;
     using Bitak.Data.Common.Repositories;
     using Bitak.Data.Models.PcComponents;
+    using Bitak.Data.Models.PcComponents.Enums;
     using Bitak.Services.Data;
+    using Bitak.Services.Mapping;
     using Bitak.Web.ViewModels.MainBoard;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Bitak.Services.Mapping;
-    using System;
     using Microsoft.EntityFrameworkCore;
-    using System.Collections.Generic;
+    using NuGet.Packaging.Signing;
     using NuGet.Protocol;
-    using System.Drawing.Drawing2D;
 
     public class MainBoardController : BaseController
     {
@@ -30,9 +34,40 @@
 
         public IDeletableEntityRepository<MainBoard> Repository { get; }
 
-        public IActionResult Index()
+        [Route("MainBoard/{id:int}")]
+        public IActionResult Index(int id)
         {
-            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
+            var model = this.MainBoardService.GetAll<MainBoardViewModel>().FirstOrDefault(x => x.Id == id);
+            return this.View(model);
+        }
+
+        public IActionResult List([FromForm] Dictionary<string, string> brand)
+        {
+            foreach (var item in Enum.GetValues(typeof(Brand)))
+            {
+                this.ViewData[$"{item}"] = string.Empty;
+            }
+
+            if (brand.Count > 1)
+            {
+                foreach (var item in brand.Keys.SkipLast(1))
+                {
+                    this.ViewData[$"{item}"] = "checked";
+                }
+                var filteredMainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
+
+                var predicate =
+                from mainboard in filteredMainboards
+                where brand.Keys.SkipLast(1).Contains(mainboard.Brand.ToString())
+                select mainboard;
+
+                var filteredModel = new MainBoardListViewModel { Mainboards = predicate };
+
+
+                return this.View(filteredModel);
+            }
+
+            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>().ToList();
             var model = new MainBoardListViewModel { Mainboards = mainboards };
 
             return this.View(model);
@@ -45,27 +80,28 @@
         }
 
         [HttpPost]
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Add(MainBoardViewModel mainBoardModel)
         {
             var mainBoard = this.MainBoardService.MakeModel(mainBoardModel);
             await this.Repository.AddAsync(mainBoard);
             await this.Repository.SaveChangesAsync();
-            return this.RedirectToAction("Index");
+            return this.RedirectToAction($"Index", new { id = mainBoard.Id });
         }
 
-        //public IActionResult FilterByBrand(string brand)
-        //{
-        //    var models = this.MainBoardService
-        //    .GetAll<MainBoardViewModel>()
-        //    .Where(b => b.Brand == brand)
-        //    .ToList();
+        //[HttpPost]
+        public IActionResult FilterByBrand([FromForm] Dictionary<string, string> brand)
+        {
+            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
 
-        //    var model = new MainBoardListViewModel { Mainboards = models };
+            var predicate =
+            from mainboard in mainboards
+            where brand.Keys.SkipLast(1).Contains(mainboard.Brand.ToString())
+            select mainboard;
 
-        //    this.TempData["MainBoardList"] = model;
+            var model = new MainBoardListViewModel() { Mainboards = predicate };
 
-        //    return this.RedirectToAction("Index", "MainBoard");
-        //}
+            return this.RedirectToAction("List", new { predicate = "Kurrrrrr!!!" });
+        }
     }
 }

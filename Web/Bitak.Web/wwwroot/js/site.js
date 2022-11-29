@@ -15,4 +15,12 @@
         $("#amount").val($("#slider-range").slider("values", 0) +
             " - " + $("#slider-range").slider("values", 1));
     });
+
+    $(function checkBox(item)
+    {
+        if (this.checked) {
+            alert(item);
+
+        }
+    });
 })

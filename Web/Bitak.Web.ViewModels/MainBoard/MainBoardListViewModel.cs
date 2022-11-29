@@ -4,6 +4,11 @@
 
     public class MainBoardListViewModel
     {
+        public MainBoardListViewModel()
+        {
+            this.Mainboards = new List<MainBoardViewModel>();
+        }
+
         public IEnumerable<MainBoardViewModel> Mainboards { get; set; }
     }
 }

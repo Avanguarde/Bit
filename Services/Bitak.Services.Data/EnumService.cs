@@ -4,7 +4,7 @@
 
     public class EnumService : IEnumService
     {
-              public Array GetAll<T>()
+        public Array GetAll<T>()
         {
             var output = Enum.GetValues(typeof(T));
 

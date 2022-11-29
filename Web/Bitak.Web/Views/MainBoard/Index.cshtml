@@ -1,48 +1,32 @@
-﻿@using Bitak.Web.ViewModels.SideBar
-@model Bitak.Web.ViewModels.MainBoard.MainBoardListViewModel
+﻿@using Bitak.Web.ViewModels.MainBoard
 
-@{
-    this.ViewData["Title"] = "MainBoards";
-}
+@model MainBoardViewModel
 
-<section id="category-grid">
-    <div class="container">
-        <div class="row">
-            <!------------------------------------Sidebar------------------------------------------------------>
-            <div class="col-md-3">
-                <partial name="_SidebarFilterPartial" />
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    @foreach (var item in Model.Mainboards)
-                    {
-                        <div class="col-md-4" style="padding: 10px;">
-                            <div>@item.Name</div>
-                            <div><span>Brand: </span>@item.Brand</div>
-                            <div><span>Chipset: </span>@item.Chipset</div>
-                            <div><span>Memory slots: </span>@item.MemorySlots</div>
-                            <div><span>Socket: </span>@item.Socket</div>
-                            <div><span>Form factor: </span>@item.FormFactor</div>
-                            <div><span>Interfaces: </span>@item.Interfaces</div>
-                            <div><span>Memory type: </span>@item.MemoryType</div>
-                            <div><span>Price: </span>@item.Price</div>
-
-                        </div>
-                    }
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <ul>
+                    <li id="ModelName">
+                        <span for="ModelName">
+                            Model Name:
+                        </span>
+                        @Model.Name;
+                    </li>
+                    <li id="ModelBrand">
+                        <span for="ModelBrand">
+                            Brand:
+                        </span>
+                        @Model.Brand
+                    </li>
+                    <li id="ModelChipset">
+                        <span for="ModelChipset">
+                            Chipset:
+                        </span>
+                        @Model.Chipset
+                    </li>
+                </ul>
             </div>
         </div>
-
     </div>
-</section>
-
-<script type="text/javascript">
-    $(document).ready(function ()
-    {
-        $("#ioio").click(function ()
-        {
-            let a = this.text;
-            alert("opsa" + " " + a);
-        })
-    })
-</script>
+</div>

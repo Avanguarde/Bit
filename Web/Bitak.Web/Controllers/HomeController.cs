@@ -1,7 +1,7 @@
 ﻿namespace Bitak.Web.Controllers
 {
     using System.Diagnostics;
-
+    using System.Linq;
     using Bitak.Services.Data;
     using Bitak.Web.ViewModels;
     using Bitak.Web.ViewModels.MainBoard;
@@ -18,7 +18,7 @@
 
         public IActionResult Index()
         {
-            var mainboards = this.mainBoardService.GetAll<MainBoardViewModel>();
+            var mainboards = this.mainBoardService.GetAll<MainBoardViewModel>().ToList();
             var model = new MainBoardListViewModel { Mainboards = mainboards };
             return this.View(model);
         }

@@ -9,6 +9,8 @@
     using Bitak.Data.Models.PcComponents;
     using Bitak.Services.Mapping;
     using Bitak.Web.ViewModels.MainBoard;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
     public class MainBoardService : IMainBoardService
     {
@@ -30,6 +32,11 @@
             return count;
         }
 
+        public int GetCount(string val)
+        {
+            var result = from brand in this.delitableRepository.AllAsNoTracking()
+                         .Where(this.delitableRepository.AllAsNoTracking().Contains(val))
+        }
         public MainBoard MakeModel(MainBoardViewModel viewModel)
         {
             var mainBoard = new MainBoard()
