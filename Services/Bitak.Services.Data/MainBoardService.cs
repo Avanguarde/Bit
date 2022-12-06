@@ -7,6 +7,7 @@
 
     using Bitak.Data.Common.Repositories;
     using Bitak.Data.Models.PcComponents;
+    using Bitak.Data.Models.PcComponents.Enums;
     using Bitak.Services.Mapping;
     using Bitak.Web.ViewModels.MainBoard;
     using Microsoft.EntityFrameworkCore;
@@ -34,9 +35,15 @@
 
         public int GetCount(string val)
         {
-            var result = from brand in this.delitableRepository.AllAsNoTracking()
-                         .Where(this.delitableRepository.AllAsNoTracking().Contains(val))
+            var result = from brand in this.delitableRepository
+                         .AllAsNoTracking()
+                         .Where(x => x.Brand.ToString() == val)
+                         .ToList()
+                         select brand;
+
+            return result.Count();
         }
+
         public MainBoard MakeModel(MainBoardViewModel viewModel)
         {
             var mainBoard = new MainBoard()

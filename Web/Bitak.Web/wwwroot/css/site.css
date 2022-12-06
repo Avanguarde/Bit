@@ -399,3 +399,15 @@ a.article, a.article:hover {
     font-size: 0.7em;
     color: lightgrey !important;
 }
+
+.filterElement{
+    color: red;
+}
+
+.warning{
+    color: yellow;
+}
+
+.hidden{
+    display: none;
+}

@@ -5,6 +5,7 @@
     using System.Drawing.Drawing2D;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Text;
     using System.Threading.Tasks;
 
     using AutoMapper;
@@ -21,6 +22,7 @@
     using Microsoft.EntityFrameworkCore;
     using NuGet.Packaging.Signing;
     using NuGet.Protocol;
+    using SendGrid.Helpers.Mail;
 
     public class MainBoardController : BaseController
     {
@@ -41,33 +43,10 @@
             return this.View(model);
         }
 
-        public IActionResult List([FromForm] Dictionary<string, string> brand)
+        public IActionResult List()
         {
-            foreach (var item in Enum.GetValues(typeof(Brand)))
-            {
-                this.ViewData[$"{item}"] = string.Empty;
-            }
+            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
 
-            if (brand.Count > 1)
-            {
-                foreach (var item in brand.Keys.SkipLast(1))
-                {
-                    this.ViewData[$"{item}"] = "checked";
-                }
-                var filteredMainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
-
-                var predicate =
-                from mainboard in filteredMainboards
-                where brand.Keys.SkipLast(1).Contains(mainboard.Brand.ToString())
-                select mainboard;
-
-                var filteredModel = new MainBoardListViewModel { Mainboards = predicate };
-
-
-                return this.View(filteredModel);
-            }
-
-            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>().ToList();
             var model = new MainBoardListViewModel { Mainboards = mainboards };
 
             return this.View(model);
@@ -88,20 +67,29 @@
             await this.Repository.SaveChangesAsync();
             return this.RedirectToAction($"Index", new { id = mainBoard.Id });
         }
-
-        //[HttpPost]
-        public IActionResult FilterByBrand([FromForm] Dictionary<string, string> brand)
+        [HttpPost]
+        public IActionResult FilterByBrand(Dictionary<string, string> dic)
         {
-            var mainboards = this.MainBoardService.GetAll<MainBoardViewModel>();
+            foreach (var item in dic)
+            {
+                var splt = item.Key.Split(' ');
+                var fltr = splt[1];
+                var name = splt[0];
 
-            var predicate =
-            from mainboard in mainboards
-            where brand.Keys.SkipLast(1).Contains(mainboard.Brand.ToString())
-            select mainboard;
+                switch (name)
+                {
 
-            var model = new MainBoardListViewModel() { Mainboards = predicate };
+                    case "Brand":
+                        var list = this.MainBoardService.GetAll<MainBoardViewModel>().Where(x => x.Brand.ToString() == fltr);
+                        var model = new MainBoardListViewModel { Mainboards = list };
+                        return RedirectToAction("List", model);
+                    default:
+                        return RedirectToAction("List");
+                        break;
+                }
+            }
 
-            return this.RedirectToAction("List", new { predicate = "Kurrrrrr!!!" });
+            return this.Ok();
         }
     }
 }

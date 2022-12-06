@@ -7,29 +7,28 @@
 <section id="category-grid">
     <div class="container">
         <div class="row">
-            <!------------------------------------Sidebar------------------------------------------------------>
             <div class="col-md-3">
                 <partial name="_SidebarFilterPartial" />
             </div>
             <div class="col-md-9">
-                <div class="row">
-                    @foreach (var item in Model.Mainboards)
-                    {
+                <div id="listItems" class="row">
+                        @foreach (var item in Model.Mainboards)
+                        {
                         <div class="col-md-4" style="padding: 10px;">
-                            <a asp-controller="MainBoard" asp-action="Index" asp-route-id="@item.Id">
-                                <div>@item.Id</div>
-                                <div>@item.Name</div>
-                                <div><span>Brand: </span>@item.Brand</div>
-                                <div><span>Chipset: </span>@item.Chipset</div>
-                                <div><span>Memory slots: </span>@item.MemorySlots</div>
-                                <div><span>Socket: </span>@item.Socket</div>
-                                <div><span>Form factor: </span>@item.FormFactor</div>
-                                <div><span>Interfaces: </span>@item.Interfaces</div>
-                                <div><span>Memory type: </span>@item.MemoryType</div>
-                                <div><span>Price: </span>@item.Price</div>
-                            </a>
-                        </div>
-                    }
+                            <a class="filterElement" asp-controller="MainBoard" asp-action="Index" asp-route-id="@item.Id">
+                                    <div>@item.Id</div>
+                                    <div>@item.Name</div>
+                                    <div><span>Brand: </span>@item.Brand</div>
+                                    <div><span>Chipset: </span>@item.Chipset</div>
+                                    <div><span>Memory slots: </span>@item.MemorySlots</div>
+                                    <div><span>Socket: </span>@item.Socket</div>
+                                    <div><span>Form factor: </span>@item.FormFactor</div>
+                                    <div><span>Interfaces: </span>@item.Interfaces</div>
+                                    <div><span>Memory type: </span>@item.MemoryType</div>
+                                    <div><span>Price: </span>@item.Price</div>
+                                </a>
+                            </div>
+                        }
                 </div>
             </div>
         </div>
@@ -38,12 +37,8 @@
 </section>
 
 <script type="text/javascript">
-    $(document).ready(function ()
-    {
-        $("#ioio").click(function ()
-        {
-            let a = this.text;
-            alert("opsa" + " " + a);
-        })
-    })
+    //$(document).ready(function () {
+    //    console.log($("#brandCheckList input:checkbox:checked"));
+    //});
+
 </script>

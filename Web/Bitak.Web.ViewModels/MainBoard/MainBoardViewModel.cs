@@ -1,7 +1,7 @@
 ﻿namespace Bitak.Web.ViewModels.MainBoard
 {
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
+
     using AutoMapper;
 
     using Bitak.Data.Models.PcComponents;
@@ -43,9 +43,6 @@
         public string Interfaces { get; set; }
 
         public int? Waranty { get; set; }
-
-        [NotMapped]
-        public bool IsChecked { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

@@ -6,140 +6,93 @@
 
 @model MainBoardListViewModel;
 
-
 <div id="sidebar" class="container">
-    <div class="form-check">
-        <div>
-            <form id="brandForm" method="post">
+    <form asp-controller="MainBoard" asp-action="List" id="brandForm" method="get">
+        <div class="form-check">
+            <div>
                 <div>
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#collapseBrand" style="background-color: #fafafa; font-weight: bold; padding: 0;">
                         Brands
                     </a>
                     <div id="collapseBrand" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
                         <ul class="list-group" id="brandCheckList" style="list-style-type: none">
-                            @foreach (var item in enumService.GetAll<Brand>())
+                            @foreach (var item in Model.GetBrands())
                             {
-                                @*TODO handle event oncheckbox checked an filter List.cshtml for Brand *@
                                 <li>
-                                    <input name="@item" id="@item" type="checkbox" @this.ViewData[$"{item}"].ToString().ToLower()/>
+                                    <input name="Brand" id="@item" type="checkbox" value="@item" onclick="filterBrand(@item)" @*@this.ViewData[$"{item}"].ToString().ToLower()*@ />
                                     <label for="@item">@item </label>
-                                    <span for="@item" style="color: darkgrey">@this.mbService.GetCount()</span>
+                                    <span for="@item" style="color: darkgrey">(@Model.Mainboards.Where(x => x.Brand.ToString() == item).Count())</span>
                                 </li>
                             }
                         </ul>
-                        <input type="submit" value="Apply" />
                     </div>
                 </div>
-            </form>
-        </div>
-        <div>
-            <form>
-
+            </div>
+            <div>
                 <div class="">
                     <a class="nav-link text-dark" data-bs-toggle="collapse" href="#collapseFormFactor" style="background-color: #fafafa; font-weight: bold; padding: 0;">
                         Form factor
                     </a>
                     <div id="collapseFormFactor" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
                         <ul class="list-group" style="list-style-type: none;">
-                            @foreach (var item in enumService.GetAll<FormFactor>())
+                            @foreach (var item in Model.GetFormFactor())
                             {
-
                                 <li>
-                                    <input id="@item" type="checkbox" style="margin-right: 5px;" />
+                                    <input name="FormFactor" id="@item" type="checkbox" value="@item" />
                                     <label for="@item">@item</label>
+                                    <span for="@item" style="color: darkgrey">(@Model.Mainboards.Where(x => x.FormFactor.ToString() == item).Count())</span>
                                 </li>
                             }
                         </ul>
                     </div>
                 </div>
-
-            </form>
-        </div>
-        <div>
-            <form>
+            </div>
+            <div>
                 <fieldset>
                     <div class="">
-                        <a class="nav-link text-dark" aria-controls="collapseOne" aria-expanded="true" data-toggle="collapse" href="#collapseChipset" style="background-color: #fafafa; font-weight: bold; padding: 0;">
+                        <a class="nav-link text-dark" data-bs-toggle="collapse" href="#collapseChipset" style="background-color: #fafafa; font-weight: bold; padding: 0;">
                             Chipset
                         </a>
                         <div id="collapseChipset" class="panel-collapse collapse in" data-role="controlgroup" role="tabpanel">
-                            <ul style="list-style-type: none; margin-right: 3px;">
-                                @foreach (var item in enumService.GetAll<MbChipset>())
+                            <ul class="list-group" style="list-style-type: none;">
+                                @foreach (var item in Model.GetChipset())
                                 {
                                     <li>
-                                        <input id="@item" type="checkbox" style="margin-right: 5px;" />
+                                        <input name="Chipset" id="@item" type="checkbox" style="margin-right: 5px;" value="@item" />
                                         <label for="@item">@item</label>
+                                        <span for="@item" style="color: darkgrey">(@Model.Mainboards.Where(x => x.Chipset.ToString() == item).Count())</span>
                                     </li>
                                 }
                             </ul>
                         </div>
                     </div>
                 </fieldset>
-            </form>
-        </div>
-        <div>
-            <form>
+            </div>
+            <div>
                 <fieldset>
                     <div class="">
                         <label class="nav-link text-dark" id="Price" style="font-weight: bold; padding: 0;">Price</label>
                         <div class="wrapper" data-role="controlgroup">
                             <ul style="list-style-type: none; margin-right: 3px;">
                                 <li style="margin-right: 10px;">
-                                    <input id="amount" style="height: 30px; flex: 1; overflow: auto;" type="text" size="5" readonly; />
+                                    <input name="Price" id="amount" style="height: 30px; flex: 1; overflow: auto;" type="text" size="5" readonly; />
                                     <div id="slider-range"></div>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
                 </fieldset>
-            </form>
+            </div>
         </div>
-    </div>
+        <input class="ui-button" type="submit" value="Apply" onclick="filterBrand()" />
+    </form>
 </div>
 
 <script type="text/javascript">
-    $("#brandForm").on("submit", function ()
-    {
-        if ($("#brandCheckList li").children('input[type="checkbox"]').is(':checked')) {
-            //alert(JSON.stringify($("#brandCheckList li")))
-            var list = $("#brandCheckList li");
 
-           
-            $('#brandCheckList li').each(function (index)
-            {
-                
-                console.log(index + ': ' + $(this).text());
-                if ($(this).find("input[type=checkbox]").is(":checked")) {
+    console.log("ready");
+    function filterBrand (arg){
+        $(".filterElement").filter
+    }
 
-                    $(this).prop("checked", true);
-                    console.error("Ura")
-                }
-                
-            });
-        }
-        
-
-        //$.ajax({
-        //    type: 'POST',
-        //    url: "/MainBoard/FilterByBrand",
-        //    dataType: 'json',
-        //    data: {
-        //        let list = $(#"brandCheckList:checkbox:checked")
-        //    },
-        //    //success: function (result)
-        //    //{
-        //    //    if (result != null) {
-        //    //        $("#totalValuesPartialView").html(result.totalValuesPartialView);
-        //    //        $("#summaryValuesPartialView").html(result.summaryValuesPartialView);
-        //    //    } else {
-        //    //        alert('Error getting data.');
-        //    //    }
-        //    //},
-        //    error: function ()
-        //    {
-        //        alert('Error getting data.');
-        //    }
-        //});
-    });
 </script>
